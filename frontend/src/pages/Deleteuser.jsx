@@ -17,6 +17,8 @@ function Deleteuser() {
     <div>
         <h1>Dlete User</h1>
         <input type="number" placeholder='Enter ur ID' value={id} onChange={(e)=>{Number(setID(e.target.value))}} />
+        <br />
+        <br />
         <button onClick={handleDelete}>Delete</button>
     </div>
   )

@@ -29,9 +29,17 @@ const [id,setId]=useState("")
     <div>
         <h1>Update User</h1>
         <input type="number" placeholder='Enter your ID' value={id} onChange={(e)=>{Number(setId(e.target.value))}} />
+        <br />
+        <br />
          <input type="text" placeholder='Enter your Username'value={username} onChange={(e)=>{setUsername(e.target.value)}} />
+         <br />
+         <br />
          <input type="text" placeholder='Enter your email'value={email} onChange={(e)=>{seEmail(e.target.value)}} />
+         <br />
+         <br />
          <input type="number" placeholder='Enter your Age' value={age} onChange={(e)=>{Number(setAge(e.target.value))}} />
+         <br />
+         <br />
          <button onClick={handleUpadte}>Update</button>
     </div>
   )

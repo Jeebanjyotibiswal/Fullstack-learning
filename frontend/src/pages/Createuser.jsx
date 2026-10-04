@@ -24,13 +24,19 @@ function Createuser() {
     <div>
       <h1>Create User</h1>
       <input type="text" placeholder='Enter your name' value={username} onChange={(e)=>{setUsername(e.target.value)}}  />
+      <br />
+      <br />
       <input type="text" placeholder='Enter your Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} />
+      <br />
+      <br />
         <input
         type="number"
         placeholder="Enter your age"
         value={age}
         onChange={(e) => setAge(Number(e.target.value))}
       />
+      <br />
+      <br />
       <button onClick={handleCreate}>Create</button>
     </div>
   );
