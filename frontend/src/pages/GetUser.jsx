@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 function GetUser() {
   const [data, setData] = useState([]);
 
+  const getData = async () => {
+    const url = "http://127.0.0.1:8000/users";
+
+    try {
+      const response = await axios.get(url);
+      setData(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const getUserdata = async () => {
-      const url = "http://127.0.0.1:8002/users/";
-
-      try {
-        const response = await axios.get(url);
-        setData(response.data);
-      } catch (error) {
-        console.error("Failed to fetch users:", error);
-      }
-    };
-
-    getUserdata();
+    getData();
   }, []);
 
   return (
     <div>
-      <h1>All users</h1>
-      {data.length === 0 ? (
-        <p>No users found.</p>
-      ) : (
-        data.map((item) => (
+      <h1>All Users</h1>
+
+      <div>
+        {data.map((item) => (
           <div key={item.id}>
             <p>Name: {item.username}</p>
             <p>Email: {item.email}</p>
             <p>Age: {item.age}</p>
-            <p>-------------------------------------------</p>
+            <p>ID: {item.id}</p>
+            <p>---------------</p>
           </div>
-        ))
-      )}
+        ))}
+      </div>
     </div>
   );
 }

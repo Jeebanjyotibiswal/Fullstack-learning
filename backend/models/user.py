@@ -1,8 +1,9 @@
-from sqlalchemy import Column, Integer, String
-from database import Base
-class Usermodel(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, index=True)
-    email = Column(String)
-    age = Column(Integer)
+from database import base
+from sqlalchemy import Column,Integer,String
+
+class User(base):
+    __tablename__="user"
+    id=Column(Integer,primary_key=True)
+    username=Column(String)
+    email=Column(String)
+    age=Column(Integer)
