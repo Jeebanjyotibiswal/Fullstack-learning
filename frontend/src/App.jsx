@@ -5,6 +5,7 @@ import GetUser from "./pages/GetUser";
 import Createuser from "./pages/Createuser";
 import Updateuser from "./pages/Updateuser";
 import Deleteuser from "./pages/Deleteuser";
+import Weatherpage from "./pages/Weatherpage";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <Link to="/users">Read Users</Link> {" | "}
           <Link to="/create-user">Add User</Link> {" | "}
           <Link to="/update-user">Update User</Link> {" | "}
-          <Link to="/delete-user">Delete User</Link>
+          <Link to="/delete-user">Delete User</Link> {" | "}
+          <Link to="/weather">Weather</Link>
         </nav>
 
         <hr />
@@ -35,6 +37,7 @@ function App() {
           <Route path="/update-user" element={<Updateuser />} />
 
           <Route path="/delete-user" element={<Deleteuser />} />
+          <Route path="/weather" element={<Weatherpage />} />
         </Routes>
       </div>
     </BrowserRouter>

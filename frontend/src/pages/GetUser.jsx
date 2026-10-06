@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Redis from "./Redis";
 
 function GetUser() {
   const [data, setData] = useState([]);
@@ -21,9 +22,12 @@ function GetUser() {
 
   return (
     <div>
+      <h1>redis Data</h1>
+        <Redis />
       <h1>All Users</h1>
 
       <div>
+        
         {data.map((item) => (
           <div key={item.id}>
             <p>Name: {item.username}</p>
