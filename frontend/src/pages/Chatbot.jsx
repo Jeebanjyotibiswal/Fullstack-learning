@@ -253,9 +253,12 @@ function Chatbot() {
                         >
                             {loading ? "..." : "Send"}
                         </button>
+                        
                     </div>
                 </div>
+                                
             </div>
+            <p></p>
         </div>
     );
 }
