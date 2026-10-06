@@ -10,7 +10,7 @@ import hashlib
 from langchain_groq import ChatGroq
 import httpx
 app=FastAPI()
-api_key="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"
+
 model="openai/gpt-oss-120b"
 llm=ChatGroq(api_key=api_key,model=model,temperature=0.7,  max_tokens=1024,
     timeout=None,
