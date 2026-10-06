@@ -6,8 +6,15 @@ from schemas.user import UserSchema
 from database import base,get_db,engine
 from redis_client import redis_client
 import json
+import hashlib
+from langchain_groq import ChatGroq
 import httpx
 app=FastAPI()
+api_key="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"
+model="openai/gpt-oss-120b"
+llm=ChatGroq(api_key=api_key,model=model,temperature=0.7,  max_tokens=1024,
+    timeout=None,
+    max_retries=2,)
 base.metadata.create_all(bind=engine)
 cors_origins=["http://localhost:5173"]
 app.add_middleware(
@@ -223,4 +230,49 @@ async def get_weather():
     return {
         "source": "external_api",
         "data": weather_data
+    }
+
+@app.get("/chat/{prompt}")
+async def chat_with_llm(prompt: str):
+
+    # 1. Create cache key
+    prompt_hash = hashlib.sha256(
+        prompt.encode("utf-8")
+    ).hexdigest()
+
+    cache_key = f"llm:{prompt_hash}"
+
+    # 2. Check Redis
+    cached_response = await redis_client.get(cache_key)
+
+    if cached_response:
+
+        print("🤖 LLM RESPONSE FROM REDIS")
+
+        return {
+            "source": "redis",
+            "message": "Response from cache",
+            "data": cached_response
+        }
+
+    print("🔥 CACHE MISS - CALLING GROQ")
+
+    # 3. Call LLM
+    response = llm.invoke(prompt)
+
+    llm_response = response.content
+
+    # 4. Store response in Redis
+    # TTL = 300 seconds = 5 minutes
+    await redis_client.set(
+        cache_key,
+        llm_response,
+        ex=300
+    )
+
+    # 5. Return response
+    return {
+        "source": "groq",
+        "message": "Response from LLM",
+        "data": llm_response
     }

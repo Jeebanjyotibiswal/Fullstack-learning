@@ -6,6 +6,7 @@ import Createuser from "./pages/Createuser";
 import Updateuser from "./pages/Updateuser";
 import Deleteuser from "./pages/Deleteuser";
 import Weatherpage from "./pages/Weatherpage";
+import Chatbot from "./pages/Chatbot";
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
           <Link to="/create-user">Add User</Link> {" | "}
           <Link to="/update-user">Update User</Link> {" | "}
           <Link to="/delete-user">Delete User</Link> {" | "}
-          <Link to="/weather">Weather</Link>
+          <Link to="/weather">Weather</Link> {" | "}
+          <Link to="/chatbot">Chatbot</Link>
         </nav>
 
         <hr />
@@ -38,6 +40,7 @@ function App() {
 
           <Route path="/delete-user" element={<Deleteuser />} />
           <Route path="/weather" element={<Weatherpage />} />
+          <Route path="/chatbot" element={<Chatbot />} />
         </Routes>
       </div>
     </BrowserRouter>
