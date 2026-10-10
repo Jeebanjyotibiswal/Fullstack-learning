@@ -9,6 +9,7 @@ import json
 import hashlib
 from langchain_groq import ChatGroq
 import httpx
+from prometheus_fastapi_instrumentator import Instrumentator
 app=FastAPI()
 from dotenv import load_dotenv
 load_dotenv()
@@ -279,3 +280,5 @@ async def chat_with_llm(prompt: str):
         "message": "Response from LLM",
         "data": llm_response
     }
+
+Instrumentator().instrument(app).expose(app)
